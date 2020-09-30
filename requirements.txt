@@ -185,4 +185,3 @@ xlrd==1.2.0
 yapf @ file:///tmp/build/80754af9/yapf_1593528177422/work
 yfinance==0.1.54
 zipp==3.1.0
-psycopg2==2.6.2
