@@ -1,1 +1,1 @@
-clock: python test_app.py
+web: Streamlit run test_app.py
