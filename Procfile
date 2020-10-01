@@ -1,1 +1,1 @@
-web: Streamlit run test_app.py
+web: streamlit run test_app.py
