@@ -6,7 +6,6 @@ This is a temporary script file.
 """
 
 
-.listen(process.env.PORT || 5000)
 
 import yfinance as yf
 import streamlit as st
