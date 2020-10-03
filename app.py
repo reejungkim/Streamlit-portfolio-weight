@@ -23,7 +23,6 @@ file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%2
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
 tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
-tickers_selected =['AAPL', 'GOOG']
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
@@ -39,7 +38,7 @@ else:
     st.error('Error: End date must fall after start date')
 
 
-st.write(tickers_selected)
+
 
 if( tickers_selected != [] ):
 # LOAD DATA
@@ -62,13 +61,11 @@ if( tickers_selected != [] ):
         df = df.append(single_table)     
     df = df.loc[df['Date'].notnull()]
     df = df.set_index('Date')  
-    st.line_chart(df.Close)
+    st.line_chart(df['Close'].groupby('Date').sum() )
     #st.line_chart(df.Volume)
 
 
 
-x = st.slider('Select a value')
-st.write(x, 'squared is', x * x)
 
 
 st.write("""
