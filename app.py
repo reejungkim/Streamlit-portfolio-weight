@@ -23,6 +23,7 @@ file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%2
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
 tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
+tickers_selected =['AAPL', 'GOOG']
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
@@ -60,7 +61,7 @@ if( tickers_selected != [] ):
         single_table['ticker'].ffill(inplace=True)
         df = df.append(single_table)     
     df = df.loc[df['Date'].notnull()]
-    df = df.reset_index(drop=True)  
+    df = df.set_index('Date')  
     st.line_chart(df.Close)
     #st.line_chart(df.Volume)
 
