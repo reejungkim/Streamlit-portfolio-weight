@@ -23,11 +23,11 @@ file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%2
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
 tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
-tickers_selected =['AAPL']
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
 # DATES
+st.sidebar.title("Select date range")
 today = dt.datetime.now()
 start_date = st.sidebar.date_input('Start date', today - dt.timedelta(days=30))
 end_date = st.sidebar.date_input('End date', today - dt.timedelta(days=1)) 
@@ -60,10 +60,14 @@ if( tickers_selected != [] ):
         single_table['ticker'].ffill(inplace=True)
         df = df.append(single_table)     
     df = df.loc[df['Date'].notnull()]
-    df = df.reset_index(drop=True)   
-    st.line_chart(df.Close)
+    df = df.reset_index(drop=True)  
+    st.line_chart(tickers_selected, df.Close)
     #st.line_chart(df.Volume)
 
+
+
+x = st.slider('Select a value')
+st.write(x, 'squared is', x * x)
 
 
 st.write("""
