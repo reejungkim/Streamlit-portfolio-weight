@@ -58,13 +58,25 @@ df = df.reset_index(drop=True)
 
 
 
-start_date = st.date_input('Start date', today - dt.timedelta(days=1))
-end_date = st.date_input('End date', today)
+# Date inputs
+#start_date = st.date_input('Start date', today - dt.timedelta(days=1))
+#end_date = st.date_input('End date', today)
 
-if start_date < end_date:
-    st.success('Start date: `%s`\n\nEnd date:`%s`' % (start_date, end_date))
-else:
-    st.error('Error: End date must fall after start date')
+#if start_date < end_date:
+#    st.success('Start date: `%s`\n\nEnd date:`%s`' % (start_date, end_date))
+#else:
+#    st.error('Error: End date must fall after start date')
+
+d3 = st.date_input("range, no dates", [])
+st.write(d3)
+
+d3 = st.date_input("Range, one date", [dt.date(2020, 1, 1)])
+st.write(d3)
+
+d5 = st.date_input("date range without default", [dt.date(2020, 1, 1), dt.date(2020, 1, 7)])
+st.write(d5)
+
+
 
 
 st.write("""
