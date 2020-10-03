@@ -53,12 +53,12 @@ df = df.reset_index(drop=True)
 
 
 
-st.line_chart(df.Close)
-st.line_chart(df.Volume)
+#st.line_chart(df.Close)
+#st.line_chart(df.Volume)
 
 
 
-start_date = st.date_input('Start date', today-7)
+start_date = st.date_input('Start date', today - dt.timedelta(days=1))
 end_date = st.date_input('End date', today)
 
 if start_date < end_date:
