@@ -13,16 +13,16 @@ from pandas_datareader import data as pdr
 import streamlit as st
 
 date_start = '2020-01-01'
-date_end = dt.datetime.now() 
+today = dt.datetime.now() 
   
-
-SP100_tickers = pd.read_csv('/Users/reejungkim/Documents/Git/Heroku_deployment/Streamlit/testingstreamlit/S&P100 tickers.csv')
-print(SP100_tickers['Symbol'])
+file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%20tickers.csv'
+SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
+#print(SP100_tickers['Symbol'])
 
 
 st.write("""
 # Simple Stock Price App
-Shown are the stock closing price and volume of Google!
+Shown are the stock closing price and volume of S&P 100 stocks!
 """)
 
 
@@ -33,10 +33,10 @@ df = pd.DataFrame()
 for i in SP100_tickers['Symbol']:
     symbol = SP100_tickers.loc[SP100_tickers['Symbol']==i]
     try:
-        symbol_data = pdr.DataReader(i, 'yahoo', date_start, date_end).reset_index()
+        symbol_data = pdr.DataReader(i, 'yahoo', date_start, today).reset_index()
         #display(symbol_data)  
     except (KeyError, ValueError):  # the error could possibly occur when there's "." in stock name 
-        symbol_data = pdr.DataReader(i.replace('.','-'), 'yahoo', date_start, date_end).reset_index()
+        symbol_data = pdr.DataReader(i.replace('.','-'), 'yahoo', date_start, today).reset_index()
         #symbol_data = pd.DataFrame()
         pass
     except:
@@ -57,6 +57,14 @@ st.line_chart(df.Close)
 st.line_chart(df.Volume)
 
 
+
+start_date = st.date_input('Start date', today-7)
+end_date = st.date_input('End date', today)
+
+if start_date < end_date:
+    st.success('Start date: `%s`\n\nEnd date:`%s`' % (start_date, end_date))
+else:
+    st.error('Error: End date must fall after start date')
 
 
 st.write("""
