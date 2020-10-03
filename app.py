@@ -61,7 +61,7 @@ if( tickers_selected != [] ):
         df = df.append(single_table)     
     df = df.loc[df['Date'].notnull()]
     df = df.reset_index(drop=True)  
-    st.line_chart(tickers_selected, df.Close)
+    st.line_chart(df.Close)
     #st.line_chart(df.Volume)
 
 
