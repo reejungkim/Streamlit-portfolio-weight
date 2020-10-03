@@ -38,7 +38,7 @@ else:
     st.error('Error: End date must fall after start date')
 
 
-
+st.write(tickers_selected)
 
 if( tickers_selected != [] ):
 # LOAD DATA
