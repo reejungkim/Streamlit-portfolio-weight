@@ -8,6 +8,7 @@ This is a temporary script file.
 import datetime as dt
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 #to get financial data
 from pandas_datareader import data as pdr
 #import yfinance as yf
@@ -69,11 +70,35 @@ if( tickers_selected != [] ):
     
     df = df.reset_index(drop=False)
     d = df.pivot_table(values='Close', index='Date', columns='ticker', aggfunc=np.sum, margins=False)
+    
+    #variance (rate of change)
     logChange = np.log(d / d.shift(1)) 
+    
+    #expected annual return
+    logChange.mean()*252 
 
+    #simulation
+    prets = []  #stores list of portfolio returns
+    pvols = []  #stores list of portolfio volatilities
 
-
-
+    for p in range (5000):
+        weights = np.random.random(len(tickers_selected))
+        weights /= np.sum(weights)
+        prets.append(np.sum(logChange.mean() * weights) * 252)
+        pvols.append(np.sqrt(np.dot(weights.T, 
+                            np.dot(logChange.cov() * 252, weights))))
+    prets = np.array(prets)
+    pvols = np.array(pvols)
+    
+    plt.scatter(pvols, prets, c=prets/pvols, marker='o', cmap='coolwarm') # mpl.cm.jet)
+    
+    plt.grid(True)
+    plt.xlabel('expected volatility')
+    plt.ylabel('expected return')
+    plt.colorbar(label='Sharpe ratio') #beta
+    plt.show()
+    
+    st.pyplot()
 
 st.write("""
     | Price | Volume |
