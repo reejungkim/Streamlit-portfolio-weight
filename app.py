@@ -7,6 +7,7 @@ This is a temporary script file.
 
 import datetime as dt
 import pandas as pd
+import numpy as np
 #to get financial data
 from pandas_datareader import data as pdr
 #import yfinance as yf
@@ -23,6 +24,8 @@ file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%2
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
 tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
+
+tickers_selected = ["AAPL", "GOOG"]
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
@@ -63,6 +66,10 @@ if( tickers_selected != [] ):
     df = df.set_index('Date')  
     st.line_chart(df['Close'].groupby('Date').sum() )
     #st.line_chart(df.Volume)
+    
+    df = df.reset_index(drop=False)
+    d = df.pivot_table(values='Close', index='Date', columns='ticker', aggfunc=np.sum, margins=False)
+    logChange = np.log(d / d.shift(1)) 
 
 
 
