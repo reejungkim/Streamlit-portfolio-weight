@@ -17,10 +17,7 @@ from pandas_datareader import data as pdr
 #import yfinance as yf
 import streamlit as st
 
-st.write("""
-# Simple Stock Price App
-Shown are the stock closing price and volume of S&P 100 stocks!
-""")
+st.write("Optimal portfolio weight calculation based on Makowitz portfolio theory")
 
 
 # TICKERS
@@ -28,6 +25,7 @@ file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%2
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
 tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
+#tickers_selected =['AAPL', 'AMZN']
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
@@ -41,6 +39,9 @@ if start_date < end_date:
     st.success('Start date: `%s`\n\nEnd date:`%s`' % (start_date, end_date))
 else:
     st.error('Error: End date must fall after start date')
+    
+options_dropdown = ['Close', 'High', 'Low', 'Open', 'Adj Close']
+price_indicator = st.sidebar.selectbox('Choose indicator', options_dropdown)
 
 st.sidebar.text('Enter the risk free rate in %')
 riskfree_input = st.sidebar.number_input('Enter risk free rate (%): ' ,  0.00)
@@ -120,7 +121,7 @@ if( tickers_selected != [] ):
     #st.line_chart(df.Volume)
     
     df = df.reset_index(drop=False)
-    d = df.pivot_table(values='Close', index='Date', columns='ticker', aggfunc=np.sum, margins=False)
+    d = df.pivot_table(values=price_indicator , index='Date', columns='ticker', aggfunc=np.sum, margins=False)
     
     #variance (rate of change)
     logChange = np.log(d / d.shift(1)) 
