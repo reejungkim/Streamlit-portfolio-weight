@@ -19,6 +19,12 @@ import streamlit as st
 
 st.write("Optimal portfolio weight calculation based on Makowitz portfolio theory")
 
+st.write("""
+    | Please select minimum 3 to 4 tickers to get optimal weight properly |
+    | ------|
+
+"""    )
+
 
 # TICKERS
 file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%20tickers.csv'
@@ -235,8 +241,8 @@ st.pyplot(plt)
 
 
 
-st.write("""
-    | Price | Volume |
-    | ------|:-------|
+#st.write("""
+#    | Price | Volume |
+#    | ------|:-------|
 
-"""    )
+#"""    )
