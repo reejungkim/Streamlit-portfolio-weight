@@ -17,7 +17,10 @@ from pandas_datareader import data as pdr
 #import yfinance as yf
 import streamlit as st
 
-st.write("Optimal portfolio weight calculation based on Makowitz portfolio theory")
+# SETTING PAGE CONFIG TO WIDE MODE
+st.set_page_config(layout='wide')
+
+st.write("Optimal portfolio weight calculation based on Markowitz portfolio theory")
 
 st.write("""
     | Please select minimum 3 to 4 tickers to get optimal weight properly |
