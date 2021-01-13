@@ -126,7 +126,7 @@ if( tickers_selected != [] ):
     df = df.loc[df['Date'].notnull()]
     df = df.set_index('Date')  
 # GRAPH
-    st.line_chart(df[price_indicator].groupby('Date').sum() )
+    # st.line_chart(df[price_indicator].groupby('Date').sum() )
     #st.line_chart(df.Volume)
     
     df = df.reset_index(drop=False)
