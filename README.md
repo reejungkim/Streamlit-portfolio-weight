@@ -1,5 +1,7 @@
 # Streamlit
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://optimizingportfolio.herokuapp.com/)
+
 
 <b>Objective:</b> Enable users to choose data range and easily get the optimal weight of portfolio
 
