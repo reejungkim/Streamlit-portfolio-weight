@@ -122,6 +122,7 @@ if( tickers_selected != [] ):
             pass
         single_table = pd.concat([symbol, symbol_data], axis=0, ignore_index=True) #axis=0 <- row. add frames by row and use fill down.
         single_table['ticker'].ffill(inplace=True)
+        single_table = single_table.loc[single_table.Date.notnull()]
         df = df.append(single_table)     
     df = df.loc[df['Date'].notnull()]
     df = df.set_index('Date')  
