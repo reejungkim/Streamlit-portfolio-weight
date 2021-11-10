@@ -41,7 +41,7 @@ tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 # DATES
 st.sidebar.title("Select date range")
 today = dt.datetime.now()
-start_date = st.sidebar.date_input('Start date', today - dt.timedelta(days=100))
+start_date = st.sidebar.date_input('Start date', today - dt.timedelta(days=7))
 end_date = st.sidebar.date_input('End date', today - dt.timedelta(days=1)) 
 
 if start_date < end_date:
@@ -123,8 +123,9 @@ if( tickers_selected != [] ):
         single_table = pd.concat([symbol, symbol_data], axis=0, ignore_index=True) #axis=0 <- row. add frames by row and use fill down.
         single_table['ticker'].ffill(inplace=True)
         #single_table = single_table.loc[single_table['Date'].notnull()]
-        df = df.append(single_table)     
-    df = df.loc[df['Date'].notnull()]
+        df = df.append(single_table)   
+    df = df.loc[df[price_indicator].notnull()]
+    #df = df.loc[df['Date'].notnull()]
     df = df.set_index('Date')  
 # GRAPH
     # st.line_chart(df[price_indicator].groupby('Date').sum() )
