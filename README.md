@@ -8,12 +8,19 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://optimizingportfolio.herokuapp.com/)
 
-
+[View code](https://github.com/reejungkim/Streamlit-portfolio-weight/blob/master/S%26P%20100%20Analytics%20-%20Markowitz%20portfolio.py)
 ![](https://github.com/reejungkim/Streamlit-portfolio-weight/blob/master/img/demo2.gif)
 
+```
+conda install -c conda-forge streamlit
+conda install -c anaconda beautifulsoup4
+conda install -c anaconda pandas-datareader
+conda install -c anaconda reportlab
+```
 
 <b>Objective:</b> Enable users to choose data range and easily get the optimal weight of portfolio
 
 <b>Data collection:</b> Stock data from yahoo using pandas data reader
 
 <b>Model/Algorithm used:</b> Markowitz portfolio theory
+
