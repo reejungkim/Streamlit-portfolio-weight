@@ -29,8 +29,8 @@ st.write("""
 file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%20tickers.csv'
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
-tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
-#tickers_selected =['AAPL', 'AMZN']
+#tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
+tickers_selected =['AAPL', 'AMZN']
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
