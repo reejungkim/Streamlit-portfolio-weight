@@ -30,7 +30,7 @@ file = 'https://raw.githubusercontent.com/reejungkim/Streamlit/master/S%26P100%2
 SP100_tickers = pd.read_csv(file,  error_bad_lines=False)
 
 #tickers_selected = st.multiselect("Select ticker(s)", SP100_tickers.Symbol)
-tickers_selected =['AAPL', 'AMZN']
+tickers_selected =['AAPL', 'AMZN', 'UPS']
 tickers_df = pd.DataFrame (tickers_selected,columns=['ticker'])
 
 
@@ -119,9 +119,10 @@ if( tickers_selected != [] ):
         single_table = pd.concat([symbol, symbol_data], axis=0, ignore_index=True) #axis=0 <- row. add frames by row and use fill down.
         single_table['ticker'].ffill(inplace=True)
         #single_table = single_table.loc[single_table['Date'].notnull()]
-        df = df.append(single_table)   
+        df = df.append(single_table) 
+
     df = df.loc[df[price_indicator].notnull()]
-    #st.write(df)
+    st.write(df)
     #df = df.loc[df['Date'].notnull()]
     df = df.set_index('Date')  
 # GRAPH
