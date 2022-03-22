@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Spyder Editor
 
-This is a temporary script file.
-"""
 
 import datetime as dt
 import pandas as pd
@@ -125,6 +121,7 @@ if( tickers_selected != [] ):
         #single_table = single_table.loc[single_table['Date'].notnull()]
         df = df.append(single_table)   
     df = df.loc[df[price_indicator].notnull()]
+    #st.write(df)
     #df = df.loc[df['Date'].notnull()]
     df = df.set_index('Date')  
 # GRAPH
